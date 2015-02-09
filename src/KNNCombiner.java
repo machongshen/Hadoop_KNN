@@ -22,7 +22,7 @@ public class KNNCombiner extends Reducer<IntWritable, Vector2SF, IntWritable, Ve
 			//System.out.println("V3=" + v.getV3());
 		}
 		
-		System.out.println("*****************************");
+		//System.out.println("*****************************");
 		
 		for (int i = 0; i < vs.size(); i++) {
 			

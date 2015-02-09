@@ -23,11 +23,12 @@ public class KNNDriver extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         // config a job and start it
         Configuration conf = getConf();
-        conf.set("mapred.textoutputformat.separator", ",");
+        conf.set("separator", " ");
         //look at the test folder
         for (FileStatus fs : FileSystem.get(conf).listStatus(new Path(args[2]))) {
             conf.set("test_data", fs.getPath().toString());
-         
+            int p = Integer.parseInt(args[3].trim());
+            conf.setInt("knn.k", p);
             Job job = new Job(conf, "KNN Classifier");
             job.setJarByClass(KNNDriver.class);
 

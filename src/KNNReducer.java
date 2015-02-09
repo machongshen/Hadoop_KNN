@@ -22,10 +22,11 @@ public class KNNReducer extends Reducer<IntWritable, Vector2SF, Text, Text> {
 		String s = "";
 		for (Vector2SF v : value) {
 			vs.add(new Vector2SF(v.getV1(), v.getV2(), v.getV3()));
-			System.out.println(v.getV3()+"adf" );
+			//System.out.println(v.getV3()+"adf" );
 			s = v.getV3();
 		}
-		
+		int k = context.getConfiguration().getInt("knn.k", 5);
+	
 		Collections.sort(vs, new Comparator<Vector2SF>() {
 			@Override
 			public int compare(Vector2SF o1, Vector2SF o2) {
@@ -35,7 +36,7 @@ public class KNNReducer extends Reducer<IntWritable, Vector2SF, Text, Text> {
 					return 1;
 			}
 		});
-		int k = 5;
+		
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		HashMap<String, Float> mapvalue = new HashMap<String, Float>();

@@ -36,7 +36,7 @@ public class KNN_Mapper extends Mapper<Text, SparseVector, IntWritable, Vector2S
           	
           	//System.out.println("k="+k);
           	k = k.substring(0, k.length()-1);
-          	System.out.println("machongshen nihao ="+testCase.getV1().trim());
+          	//System.out.println("machongshen nihao ="+testCase.getV1().trim());
             context.write(new IntWritable(Integer.parseInt(testCase.getV1())), new Vector2SF(s,(float)d, k));
             count ++;
         }

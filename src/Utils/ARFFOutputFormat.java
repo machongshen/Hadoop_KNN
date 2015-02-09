@@ -59,7 +59,7 @@ public class ARFFOutputFormat extends TextOutputFormat<Text, Text> {
         Configuration conf = job.getConfiguration();
         boolean isCompressed = getCompressOutput(job);
         String keyValueSeparator = conf.get(
-                "mapred.textoutputformat.separator", "\t");
+                "separator", "\t");
         CompressionCodec codec = null;
         String extension = "";
         if (isCompressed) {
