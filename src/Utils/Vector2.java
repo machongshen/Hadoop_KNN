@@ -27,6 +27,6 @@ public class Vector2<T1, T2, T3> {
 
     @Override
     public String toString() {
-            return v1 + "-" + v2;
+            return v1 + "-" + v2 +"-"+v3;
     }
 }

@@ -3,11 +3,12 @@ package Utils;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import org.apache.hadoop.io.Writable;
 
-public class SparseVector extends HashMap<String, Float> implements Writable {
+public class SparseVector extends LinkedHashMap<String, Float> implements Writable {
 
     public static final String HEAD = "HEAD_RESERVED";
     public static final String ID = "~0";

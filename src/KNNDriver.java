@@ -27,21 +27,20 @@ public class KNNDriver extends Configured implements Tool {
         //look at the test folder
         for (FileStatus fs : FileSystem.get(conf).listStatus(new Path(args[2]))) {
             conf.set("test_data", fs.getPath().toString());
-            System.out.println("current test file"
-                    + conf.get("org.niubility.learning.test"));
-            
+         
             Job job = new Job(conf, "KNN Classifier");
             job.setJarByClass(KNNDriver.class);
 
             job.setMapperClass(KNN_Mapper.class);
             job.setReducerClass(KNNReducer.class);
             job.setCombinerClass(KNNCombiner.class);
-            job.setOutputKeyClass(Text.class);
+            job.setOutputKeyClass(IntWritable.class);
             job.setMapOutputValueClass(Vector2SF.class);
             job.setOutputValueClass(SparseVector.class);
+            
             job.setInputFormatClass(ARFFInputformat.class);
             job.setOutputFormatClass(ARFFOutputFormat.class);
-            job.setOutputKeyClass(Text.class);
+            //job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(args[0]));
             Path out = new Path(args[1]);

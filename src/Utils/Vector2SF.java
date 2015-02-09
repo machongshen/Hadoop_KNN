@@ -20,12 +20,13 @@ public class Vector2SF extends Vector2<String,Float, String> implements Writable
         public void readFields(DataInput in) throws IOException {
                 v1 = in.readUTF();
                 v2 = in.readFloat();
-                v3 = in.toString();
+                v3 = in.readUTF();
         }
 
         @Override
         public void write(DataOutput out) throws IOException {
                 out.writeUTF(v1);
                 out.writeFloat(v2);
+                out.writeUTF(v3);
         }
 }

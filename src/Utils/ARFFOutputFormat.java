@@ -19,10 +19,6 @@ import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.ReflectionUtils;
 
-/**
- * ARFF file hadoop output format
- * @author Song Liu (sl9885@bristol.ac.uk)
- */
 public class ARFFOutputFormat extends TextOutputFormat<Text, Text> {
 
     protected static class Writer extends RecordWriter<Text, Text> {
@@ -45,7 +41,7 @@ public class ARFFOutputFormat extends TextOutputFormat<Text, Text> {
 //                sb.append(col + " " + map.get(col) + ",");
 //            }
             // remove the "," at the ending
-            w.write(new Text("{" + SparseVector.ID + " " + key), new Text(value + "}"));
+            w.write(new Text( key), new Text(value ));
         }
 
         @Override
