@@ -12,6 +12,9 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import  Utils.*;
+/**
+ * @author machongshen
+ */
 public class KNNDriver extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
@@ -23,7 +26,7 @@ public class KNNDriver extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         // config a job and start it
         Configuration conf = getConf();
-        conf.set("separator", " ");
+        conf.set("separator", ",");
         //look at the test folder
         for (FileStatus fs : FileSystem.get(conf).listStatus(new Path(args[2]))) {
             conf.set("test_data", fs.getPath().toString());
@@ -33,14 +36,14 @@ public class KNNDriver extends Configured implements Tool {
             job.setJarByClass(KNNDriver.class);
 
             job.setMapperClass(KNN_Mapper.class);
-            job.setReducerClass(KNNReducer.class);
-            job.setCombinerClass(KNNCombiner.class);
+            job.setReducerClass(KNN_Reducer.class);
+            job.setCombinerClass(KNN_Combiner.class);
             job.setOutputKeyClass(IntWritable.class);
-            job.setMapOutputValueClass(Vector2SF.class);
+            job.setMapOutputValueClass(Storage_Vector.class);
             job.setOutputValueClass(SparseVector.class);
             
-            job.setInputFormatClass(ARFFInputformat.class);
-            job.setOutputFormatClass(ARFFOutputFormat.class);
+            job.setInputFormatClass(KNN_Inputformat.class);
+            job.setOutputFormatClass(KNN_OutputFormat.class);
             //job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(args[0]));

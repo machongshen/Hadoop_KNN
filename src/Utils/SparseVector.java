@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import org.apache.hadoop.io.Writable;
-
+/**
+ * @author machongshen
+ */
 public class SparseVector extends LinkedHashMap<String, Float> implements Writable {
 
     public static final String HEAD = "HEAD_RESERVED";

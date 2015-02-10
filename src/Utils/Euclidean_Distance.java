@@ -1,7 +1,9 @@
 package Utils;
-
-public class EuclideanDistance implements DistanceMeasure {
-
+/**
+ * @author machongshen
+ */
+public class Euclidean_Distance implements Distance_Measure {
+	
     public double distance(SparseVector lh, SparseVector rh) {
         double res = 0;
 

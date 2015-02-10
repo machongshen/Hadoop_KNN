@@ -5,12 +5,14 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.hadoop.io.Writable;
-
-public class Vector2SF extends Vector2<String,Float, String> implements Writable {
-        public Vector2SF() {
+/**
+ * @author machongshen
+ */
+public class Storage_Vector extends KNN_Storage<String,Float, String> implements Writable {
+        public Storage_Vector() {
         }
 
-        public Vector2SF(String v1, Float v2, String v3) {
+        public Storage_Vector(String v1, Float v2, String v3) {
                 this.v1 = v1;
                 this.v2 = v2;
                 this.v3 = v3;

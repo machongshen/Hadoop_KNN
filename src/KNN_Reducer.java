@@ -10,26 +10,30 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import Utils.*;
 
-public class KNNReducer extends Reducer<IntWritable, Vector2SF, Text, Text> {
+
+/**
+ * @author machongshen
+ */
+public class KNN_Reducer extends Reducer<IntWritable, Storage_Vector, Text, Text> {
 
 	protected void reduce(
 			IntWritable key,
-			java.lang.Iterable<Vector2SF> value,
-			org.apache.hadoop.mapreduce.Reducer<IntWritable, Vector2SF, Text, Text>.Context context)
+			java.lang.Iterable<Storage_Vector> value,
+			org.apache.hadoop.mapreduce.Reducer<IntWritable, Storage_Vector, Text, Text>.Context context)
 			throws java.io.IOException, InterruptedException {
-		ArrayList<Vector2SF> vs = new ArrayList<Vector2SF>();
+		ArrayList<Storage_Vector> vs = new ArrayList<Storage_Vector>();
 		// sort each vector2SF by similarty
 		String s = "";
-		for (Vector2SF v : value) {
-			vs.add(new Vector2SF(v.getV1(), v.getV2(), v.getV3()));
+		for (Storage_Vector v : value) {
+			vs.add(new Storage_Vector(v.getV1(), v.getV2(), v.getV3()));
 			//System.out.println(v.getV3()+"adf" );
 			s = v.getV3();
 		}
 		int k = context.getConfiguration().getInt("knn.k", 5);
 	
-		Collections.sort(vs, new Comparator<Vector2SF>() {
+		Collections.sort(vs, new Comparator<Storage_Vector>() {
 			@Override
-			public int compare(Vector2SF o1, Vector2SF o2) {
+			public int compare(Storage_Vector o1, Storage_Vector o2) {
 				if (o2.getV2() > o1.getV2()) {
 					return -1;
 				} else
@@ -54,7 +58,10 @@ public class KNNReducer extends Reducer<IntWritable, Vector2SF, Text, Text> {
 		String max = "";
 		int maxint = 0;
 		int curint = 0;
-		
+		IntWritable pkd = new IntWritable(10); 
+		if (key == pkd){
+			System.out.println("good");
+		}
 		for (String sp1 : map.keySet()) {
 			curint = map.get(sp1);
 			//System.out.println("m3+"+);

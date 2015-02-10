@@ -1,14 +1,16 @@
 package Utils;
-
-public class Vector2<T1, T2, T3> {
+/**
+ * @author machongshen
+ */
+public class KNN_Storage<T1, T2, T3> {
     protected T1 v1;
     protected T2 v2;
     protected T3 v3;
-    public Vector2() {
+    public KNN_Storage() {
 
     }
 
-    public Vector2(T1 v1, T2 v2, T3 v3) {
+    public KNN_Storage(T1 v1, T2 v2, T3 v3) {
             this.v1 = v1;
             this.v2 = v2;
             this.v3 = v3;

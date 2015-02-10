@@ -8,17 +8,19 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import Utils.*;
-
-public class KNNCombiner extends Reducer<IntWritable, Vector2SF, IntWritable, Vector2SF> {
+/**
+ * @author machongshen
+ */
+public class KNN_Combiner extends Reducer<IntWritable, Storage_Vector, IntWritable, Storage_Vector> {
 	protected void reduce(
 			IntWritable key,
-			java.lang.Iterable<Vector2SF> value,
-			org.apache.hadoop.mapreduce.Reducer<IntWritable, Vector2SF, IntWritable, Vector2SF>.Context context)
+			java.lang.Iterable<Storage_Vector> value,
+			org.apache.hadoop.mapreduce.Reducer<IntWritable, Storage_Vector, IntWritable, Storage_Vector>.Context context)
 			throws java.io.IOException, InterruptedException {
-		LinkedList<Vector2SF> vs = new LinkedList<Vector2SF>();
+		LinkedList<Storage_Vector> vs = new LinkedList<Storage_Vector>();
 		// sort each vector2SF by similarty
-		for (Vector2SF v : value) {
-			vs.add(new Vector2SF(v.getV1(), v.getV2(), v.getV3()));
+		for (Storage_Vector v : value) {
+			vs.add(new Storage_Vector(v.getV1(), v.getV2(), v.getV3()));
 			//System.out.println("V3=" + v.getV3());
 		}
 		

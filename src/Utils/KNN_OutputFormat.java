@@ -18,8 +18,10 @@ import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.ReflectionUtils;
-
-public class ARFFOutputFormat extends TextOutputFormat<Text, Text> {
+/**
+ * @author machongshen
+ */
+public class KNN_OutputFormat extends TextOutputFormat<Text, Text> {
 
     protected static class Writer extends RecordWriter<Text, Text> {
 

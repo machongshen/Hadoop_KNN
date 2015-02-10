@@ -17,11 +17,9 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.input.LineRecordReader;
 
 /**
- * ARFF file hadoop input file format
- * 
- * 
+ * @author machongshen
  */
-public class ARFFInputformat extends FileInputFormat<Text, SparseVector> {
+public class KNN_Inputformat extends FileInputFormat<Text, SparseVector> {
 
 	private final static Pattern p = Pattern.compile("([^,]+,)|([^,]+})");
 
@@ -70,7 +68,7 @@ public class ARFFInputformat extends FileInputFormat<Text, SparseVector> {
 			if (r.nextKeyValue()) {
 				Text line = r.getCurrentValue();
 				String str = "1";
-				Vector2<String, SparseVector, String> v = readLineTrain(start,
+				KNN_Storage<String, SparseVector, String> v = readLineTrain(start,
 						line.toString(), str);
 				key = new Text(v.getV1());
 				value = v.getV2();
@@ -80,7 +78,7 @@ public class ARFFInputformat extends FileInputFormat<Text, SparseVector> {
 			return false;
 		}
 	}
-	public static Vector2<String, SparseVector, String> readLineTrain(
+	public static KNN_Storage<String, SparseVector, String> readLineTrain(
 			long start, String line, String str) {
 
 		// offset as ID
@@ -102,10 +100,10 @@ public class ARFFInputformat extends FileInputFormat<Text, SparseVector> {
 				i++;
 			}
 		}
-		return new Vector2<String, SparseVector, String>(key, value, str1);
+		return new KNN_Storage<String, SparseVector, String>(key, value, str1);
 	}
 	
-	public static Vector2<String, SparseVector, String> readLine(long start,
+	public static KNN_Storage<String, SparseVector, String> readLine(long start,
 			String line, String str) {
 		if (line.startsWith("{")) {
 			// split the line into key and value
@@ -136,7 +134,7 @@ public class ARFFInputformat extends FileInputFormat<Text, SparseVector> {
 				// System.out.println(v);
 				value.put(c, v);
 			}
-			return new Vector2<String, SparseVector, String>(key, value, str);
+			return new KNN_Storage<String, SparseVector, String>(key, value, str);
 		} else {
 			// offset as ID
 			String key = start + "";
@@ -157,7 +155,7 @@ public class ARFFInputformat extends FileInputFormat<Text, SparseVector> {
 			}
 			str = str.substring(0, str.length()-1);
 			
-			return new Vector2<String, SparseVector, String>(key, value, str);
+			return new KNN_Storage<String, SparseVector, String>(key, value, str);
 		}
 	}
 
