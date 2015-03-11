@@ -24,8 +24,6 @@ public class KNN_Combiner extends Reducer<IntWritable, Storage_Vector, IntWritab
 			//System.out.println("V3=" + v.getV3());
 		}
 		
-		//System.out.println("*****************************");
-		
 		for (int i = 0; i < vs.size(); i++) {
 			
 			context.write(key, vs.get(i));
